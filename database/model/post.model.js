@@ -17,4 +17,6 @@ const commentSchema = new Schema({
     content: String
 })
 
-module.exports = model('post', postSchema)
+const postModel = model('post', postSchema)
+
+module.exports = { postModel }

@@ -13,4 +13,6 @@ const userSchema = new Schema({
     following: [String]
 })
 
-module.exports = model('user', userSchema)
+const userModel = model('user', userSchema)
+
+module.exports = { userModel }

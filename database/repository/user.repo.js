@@ -1,0 +1,35 @@
+const { userModel } = require('../model/user.model')
+
+/**
+ * @param {String} id The id of the user
+ * @returns {User}
+ */
+const findUserById = id => userModel.findById(id)
+
+/**
+ * @param {String} email The email of the user
+ * @returns {User}
+ */
+const findUserByEmail = email => userModel.findOne({email})
+
+/**
+ * @param {String} username The username of the user
+ * @returns {User}
+ */
+const findUserByUsername = username => userModel.findOne({username})
+
+/**
+ * @description Create a new user document
+ * @param {User} user The object to be saved
+ * @returns {User}
+ */
+const saveUser = user => userModel.create(user)
+
+
+/* Exports */
+module.exports = {
+    findUserById,
+    findUserByEmail,
+    findUserByUsername,
+    saveUser
+}
