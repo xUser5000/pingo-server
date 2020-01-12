@@ -1,6 +1,7 @@
 const joi = require('joi')
+const { buildSchema } = require('../../../util/validator/validator.util')
 
-module.exports.registerSchema = joi.object().keys({
+module.exports.registerSchema = buildSchema({
     
     username: joi.string().required().min(6),
     
