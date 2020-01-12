@@ -25,6 +25,7 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^7.0.0",
     "mongodb-memory-server": "^6.2.1",
     "nodemon": "^2.0.2"
