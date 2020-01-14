@@ -25,11 +25,16 @@ const findUserByUsername = username => userModel.findOne({username})
  */
 const saveUser = user => userModel.create(user)
 
+/**
+ * @description Deletes all users in the database
+ */
+const deleteAllUsers = () => userModel.deleteMany({})
 
 /* Exports */
 module.exports = {
     findUserById,
     findUserByEmail,
     findUserByUsername,
-    saveUser
+    saveUser,
+    deleteAllUsers
 }

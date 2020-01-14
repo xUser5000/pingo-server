@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "mocha": "^7.0.0",
     "mongodb-memory-server": "^6.2.1",
     "nodemon": "^2.0.2"

@@ -17,6 +17,9 @@ const {
  */
 module.exports.register = async req => {
     
+    // preventing further modification of the object
+    req = Object.freeze(req)
+
     // validation
     const result = await validate(req, registerSchema);
     if (result) {
@@ -33,13 +36,15 @@ module.exports.register = async req => {
         throw new ForbiddenError('Username is already in use');
     }
 
+    const user = req
+
     // hash the password
-    req['password'] = hash(req.password)
+    user['password'] = hash(user.password)
 
     // add a default bio
-    req['bio'] = 'I am a new Pingo user'
+    user['bio'] = 'I am a new Pingo user'
 
     // save the user document
-    return (await saveUser(req));
+    return (await saveUser(user));
 
 }
