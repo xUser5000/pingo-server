@@ -2,7 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
 
-const {monitor} = require('./middleware/monitor')
+const { monitor } = require('./middleware/monitor')
+const { authController } = require('./controller/auth.controller')
 
 const app = express()
 
@@ -13,5 +14,8 @@ app.use('/status', monitor())
 
 // use the logger when in development only
 if (process.env['NODE_ENV'] !== 'production') app.use(require('morgan')('dev'))
+
+// API controllers
+app.use(authController())
 
 module.exports = { app }
