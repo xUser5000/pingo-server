@@ -31,3 +31,5 @@ const controller = async (service, res, ...args) => {
     }
 
 }
+
+module.exports = { controller }

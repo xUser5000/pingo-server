@@ -1,6 +1,6 @@
-const { app } = require('./web/app')
+const { app } = require('./src/app')
 const { config } = require('dotenv')
-const { connect } = require('./database/mongo')
+const { connect } = require('./src/database/mongo')
 
 // setup env vars
 config()
