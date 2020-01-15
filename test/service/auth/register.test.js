@@ -79,6 +79,11 @@ describe('Create a new account', () => {
         }
         const result = await register(user)
         expect(findUserByEmail(user.email)).to.eventually.not.equal(null)
+        expect(result).to.has.property('username', user.username)
+        expect(result).to.has.property('email', user.email)
+        expect(result).to.has.property('password')
+        expect(result).to.has.property('bio')
+        expect(result).to.has.property('joined')
     })
 
     it('Email address is already in use', async () => {
