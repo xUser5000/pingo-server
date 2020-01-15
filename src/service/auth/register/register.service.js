@@ -36,13 +36,16 @@ module.exports.register = async req => {
         throw new ForbiddenError('Username is already in use');
     }
 
-    const user = req
+    const user = {...req}
 
     // hash the password
     user['password'] = hash(user.password)
 
     // add a default bio
     user['bio'] = 'I am a new Pingo user'
+
+    // joined since
+    user['joined'] = new Date().getTime()
 
     // save the user document
     return (await saveUser(user));
