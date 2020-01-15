@@ -1,6 +1,6 @@
 const { registerSchema } = require('./register.schema')
-const { validate } = require('../../../util/validator/validator.util')
-const { hash } = require('../../../util/hash/hash.util')
+const { validate } = require('../../../util/validator.util')
+const { hash } = require('../../../util/hash.util')
 const { InvalidInputError } = require('../../error/InvalidInputError')
 const { ForbiddenError } = require('../../error/ForbiddenError')
 const {

@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { hash, match } = require('../../src/util/hash/hash.util')
+const { hash, match } = require('../../src/util/hash.util')
 
 describe('Hashing util test suite', () => {
 

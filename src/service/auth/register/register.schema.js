@@ -1,5 +1,5 @@
 const joi = require('joi')
-const { buildSchema } = require('../../../util/validator/validator.util')
+const { buildSchema } = require('../../../util/validator.util')
 
 module.exports.registerSchema = buildSchema({
     
