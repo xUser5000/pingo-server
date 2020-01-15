@@ -2,8 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
 
-const { monitor } = require('./middleware/monitor')
-const { authController } = require('./controller/auth.controller')
+const { monitor } = require('./web/middleware/monitor.middle')
+const { authController } = require('./web/controller/auth.controller')
 
 const app = express()
 
