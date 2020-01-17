@@ -5,4 +5,4 @@ const { getProfile } = require('../../service/user/profile/profile.service')
 
 router.get('/profile/:id', (req, res) => controller(getProfile, res, req.params['id']))
 
-module.exports = () => router
+module.exports.userController = () => router
