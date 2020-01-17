@@ -16,6 +16,6 @@ app.use('/status', monitor())
 if (process.env['NODE_ENV'] !== 'production') app.use(require('morgan')('dev'))
 
 // API controllers
-app.use(authController())
+app.use('/auth', authController())
 
 module.exports = { app }
