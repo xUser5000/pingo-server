@@ -3,7 +3,9 @@ const bodyParser = require('body-parser')
 const helmet = require('helmet')
 
 const { monitor } = require('./web/middleware/monitor.middle')
+
 const { authController } = require('./web/controller/auth.controller')
+const { userController } = require('./web/controller/user.controller')
 
 const app = express()
 
@@ -17,5 +19,6 @@ if (process.env['NODE_ENV'] !== 'production') app.use(require('morgan')('dev'))
 
 // API controllers
 app.use('/api/auth', authController())
+app.use('/api/user', userController())
 
 module.exports = { app }
