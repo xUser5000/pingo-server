@@ -18,13 +18,13 @@ const controller = async (service, res, ...args) => {
         if (e instanceof HttpError) {
 
             if (e instanceof InvalidInputError) {
-                return res.status(e.code).send({ errors: JSON.parse(e.message) });
+                res.status(e.code).send({ errors: JSON.parse(e.message) });
             } else {
-                return res.status(e.code).send({ errors: [e.message] });
+                res.status(e.code).send({ errors: [e.message] });
             }
         } else {
 
-            return res.status(500).send({ errors: ['Internal server error'] });
+            res.status(500).send({ errors: ['Internal server error'] });
 
         }
 

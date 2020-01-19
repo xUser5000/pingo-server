@@ -17,7 +17,7 @@ module.exports.authorize = async token => {
     // validation
     const result = await validate({token}, authorizeSchema)
     if (result) {
-        throw new InvalidInputError('Token is malformed')
+        throw new InvalidInputError('Please provide a well-formatted token')
     }
 
     // get data
