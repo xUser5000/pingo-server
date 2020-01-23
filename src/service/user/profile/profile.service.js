@@ -17,27 +17,26 @@ const {
 module.exports.getProfile = async ids => {
 
     // validation
-    const result = await validate({ids}, profileSchema)
-    if (result) {
+    const validationResult = await validate({ids}, profileSchema)
+    if (validationResult) {
         throw new InvalidInputError('Invalid input')
     }
 
-    try {
-        
-        // mapping all ids to queries
-        let queries =  ids.map(id => () => findUserById(id))
+    // mapping all ids to queries
+    let queries =  ids.map(id => findUserById(id))
 
-        // execute all the queries
-        let result = (await Promise.all(queries)).map(promise => {
-            let obj
-            obj[promise._id] = promise
+    // execute all the queries
+    try {
+        let result = await Promise.all(queries)
+
+        result = result.map(promise => {
+            let obj = new Map()
+            obj.set(promise['_id'].toString(), promise)
             return obj
         })
 
         return result
-
     } catch (e) {
-        throw new NotFoundError('Some Users not found')
+        throw new NotFoundError('Some users were not found')
     }
-
 }
