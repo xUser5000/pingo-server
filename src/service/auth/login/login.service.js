@@ -40,8 +40,7 @@ module.exports.login = async req => {
     }
 
     // generate the token
-    const id = user.id
-    const token = generateToken(id)
+    const token = generateToken(user._id.toString())
 
     // return the response
     return { user, token }
