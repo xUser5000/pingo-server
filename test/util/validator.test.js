@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const joi = require('joi')
 
-const { buildSchema, validate } = require('../../src/util/validator/validator.util')
+const { buildSchema, validate } = require('../../src/util/validator.util')
 
 describe('Validation test suite', () => {
 

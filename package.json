@@ -8,8 +8,9 @@
   "scripts": {
     "start": "node bin",
     "start:dev": "nodemon bin",
-    "test": "mocha",
-    "test:debug": "mocha debug"
+    "test": "mocha --timeout 10000",
+    "test:all": "mocha --timeout 10000 ./test --recursive",
+    "test:debug": "mocha debug --timeout 10000"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
