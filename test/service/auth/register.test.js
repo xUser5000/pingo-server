@@ -71,21 +71,6 @@ describe('Create a new account', () => {
         expect(register(user10)).to.be.rejectedWith(InvalidInputError)
     })
 
-    it('Create account correctly', async () => {
-        const user = {
-            username: 'abdallah5000',
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        const result = await register(user)
-        expect(findUserByEmail(user.email)).to.eventually.not.equal(null)
-        expect(result).to.has.property('username', user.username)
-        expect(result).to.has.property('email', user.email)
-        expect(result).to.has.property('password')
-        expect(result).to.has.property('bio')
-        expect(result).to.has.property('joined')
-    })
-
     it('Email address is already in use', async () => {
         const user = {
             username: 'abdallah5000',
@@ -108,6 +93,21 @@ describe('Create a new account', () => {
 
         user.email = 'hehehe@mail.com'
         expect((register(user))).to.be.rejectedWith(ForbiddenError)
+    })
+
+    it('Create account correctly', async () => {
+        const user = {
+            username: 'abdallah5000',
+            email: 'abdallah@gmail.com',
+            password: '123456789'
+        }
+        const result = await register(user)
+        expect(findUserByEmail(user.email)).to.eventually.not.equal(null)
+        expect(result).to.has.property('username', user.username)
+        expect(result).to.has.property('email', user.email)
+        expect(result).to.has.property('password')
+        expect(result).to.has.property('bio')
+        expect(result).to.has.property('joined')
     })
 
 })
