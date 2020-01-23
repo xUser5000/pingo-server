@@ -13,19 +13,19 @@ const { generateToken } = require('../../../src/util/token.util')
 
 describe('Authorization test', () => {
 
-    it('Malformed Token', () => {
-        expect(authorize('123')).to.be.rejectedWith(InvalidInputError)
-        expect(authorize('3445y.rwteyewy')).to.be.rejectedWith(InvalidInputError)
-        expect(authorize('123egoung9u355i3uby')).to.be.rejectedWith(InvalidInputError)
+    it('Malformed Token', async () => {
+        await expect(authorize('123')).to.be.rejectedWith(InvalidInputError)
+        await expect(authorize('3445y.rwteyewy')).to.be.rejectedWith(InvalidInputError)
+        await expect(authorize('123egoung9u355i3uby')).to.be.rejectedWith(InvalidInputError)
     })
 
-    it('Invalid token', () => {
+    it('Invalid token', async () => {
 
         const data = '1234'
         let token = generateToken(data)
         token = token.replace('g', 'a')
 
-        expect(authorize(token)).to.be.rejectedWith(UnAuthorizedError)
+        await expect(authorize(token)).to.be.rejectedWith(UnAuthorizedError)
 
     })
 
@@ -33,8 +33,6 @@ describe('Authorization test', () => {
         const data = '1234'
         const token = generateToken(data)
 
-        const result = await authorize(token)
-
-        expect(result).to.equal(data)
+        return expect(authorize(token)).to.eventually.equal(data)
     })
 })
