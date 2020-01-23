@@ -17,37 +17,52 @@ require('../../database/mongo.test')
 
 describe('Profile test', () => {
 
-    it('Validation test', () => {
-        const id1 = null
-        const id2 = ''
-        const id3 = '123456789'
+    it('Validation', async () => {
+        const test0 = null
+        const test1 = []
+        const test2 = ['']
+        const test3 = ['', '']
 
-        expect(getProfile(id1)).to.be.rejectedWith(InvalidInputError)
-        expect(getProfile(id2)).to.be.rejectedWith(InvalidInputError)
-        expect(getProfile(id3)).to.be.not.rejectedWith(InvalidInputError)
+        await expect(getProfile(test0)).to.be.rejectedWith(InvalidInputError)
+        await expect(getProfile(test1)).to.be.rejectedWith(InvalidInputError)
+        await expect(getProfile(test2)).to.be.rejectedWith(InvalidInputError)
+        await expect(getProfile(test3)).to.be.rejectedWith(InvalidInputError)
     })
 
-    it('User not found test', async () => {
+    it('User not found', async () => {
         let user = {
             email: 'abdallah@gmail.com',
             password: '123456789'
         }
         user = await saveUser(user)
 
-        expect(getProfile('123')).to.be.rejectedWith(NotFoundError)
+        await expect(getProfile(['5e2137ca9bt29c0ea652997b']))
+            .to.be.rejectedWith(NotFoundError)
     })
 
-    it('Get profile test', async () => {
-        let user = {
+    it('Get profile correctly', async () => {
+        let user1 = {
             email: 'abdallah@gmail.com',
             password: '123456789'
         }
-        user = await saveUser(user)
+        let user2 = {
+            email: 'ahmed@gmail.com',
+            password: '123456789'
+        }
+        user1 = await saveUser(user1)
+        user2 = await saveUser(user2)
 
-        expect(getProfile(user.id)).to.not.be.rejectedWith(NotFoundError)
-        expect(getProfile(user.id)).to.eventually.have.property('email', user.email)
-        expect(getProfile(user.id)).to.eventually.have.property('password', user.password)
-        expect(getProfile(user.id)).to.eventually.have.property('email', user.email)
+        await expect(getProfile([user1['_id'], user2['_id']]))
+            .to.not.be.rejectedWith(NotFoundError)
+
+        await expect(getProfile([user1['_id'], user2['_id']]))
+            .to.eventually.have.lengthOf(2)
+        
+        await expect(getProfile([user1['_id']]))
+            .to.not.be.rejectedWith(NotFoundError)
+
+        await expect(getProfile([user1['_id']]))
+            .to.eventually.have.lengthOf(1)
     })
 
 })

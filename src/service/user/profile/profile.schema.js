@@ -3,6 +3,11 @@ const { buildSchema } = require('../../../util/validator.util')
 
 module.exports.profileSchema = buildSchema({
 
-    id: joi.string().required()
+    ids: joi
+            .array()
+            .items(joi
+                    .string()
+                    .required())
+            .required()
 
 })

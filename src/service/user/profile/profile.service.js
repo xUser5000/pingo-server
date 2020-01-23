@@ -11,27 +11,33 @@ const {
 /**
  * @description Gets the user profile info
  * @async
- * @param {String} id The user id
- * @returns {User}
+ * @param {String []} ids The user ids
+ * @returns {User []}
  */
-module.exports.getProfile = async id => {
+module.exports.getProfile = async ids => {
 
     // validation
-    const result = await validate({id}, profileSchema)
+    const result = await validate({ids}, profileSchema)
     if (result) {
         throw new InvalidInputError('Invalid input')
     }
 
     try {
         
-        // find the user
-        const user = await findUserById(id)
+        // mapping all ids to queries
+        let queries =  ids.map(id => () => findUserById(id))
 
-        // return the user
-        return user
+        // execute all the queries
+        let result = (await Promise.all(queries)).map(promise => {
+            let obj
+            obj[promise._id] = promise
+            return obj
+        })
+
+        return result
 
     } catch (e) {
-        throw new NotFoundError('User not found')
+        throw new NotFoundError('Some Users not found')
     }
 
 }
