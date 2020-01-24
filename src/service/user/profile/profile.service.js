@@ -22,18 +22,19 @@ module.exports.getProfile = async ids => {
         throw new InvalidInputError('Invalid input')
     }
 
-    // mapping all ids to queries
+    // execute all the queries
     let queries =  ids.map(id => findUserById(id))
 
-    // execute all the queries
     try {
+
+        // wait for the execution and get the results
         let result = await Promise.all(queries)
 
-        result = result.map(promise => {
-            let obj = new Map()
-            obj.set(promise['_id'].toString(), promise)
-            return obj
-        })
+        // reduce the results array into one object
+        result = result.reduce((acc, item) => {
+            acc[item._id.toString()] = item
+            return acc
+        }, {})
 
         return result
     } catch (e) {

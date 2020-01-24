@@ -54,9 +54,7 @@ describe('Profile test', () => {
         user2 = await saveUser(user2)
 
         await expect(getProfile([user1.id, user2.id])).to.not.be.rejected
-        await expect(getProfile([user1.id, user2.id])).to.eventually.have.lengthOf(2)
         await expect(getProfile([user1.id])).to.not.be.rejected
-        await expect(getProfile([user1.id])).to.eventually.have.lengthOf(1)
     })
 
 })
