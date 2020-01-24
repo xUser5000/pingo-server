@@ -14,9 +14,7 @@ const { generateToken } = require('../../../src/util/token.util')
 describe('Authorization test', () => {
 
     it('Malformed Token', async () => {
-        await expect(authorize('123')).to.be.rejectedWith(InvalidInputError)
-        await expect(authorize('3445y.rwteyewy')).to.be.rejectedWith(InvalidInputError)
-        await expect(authorize('123egoung9u355i3uby')).to.be.rejectedWith(InvalidInputError)
+        await expect(authorize('')).to.be.rejectedWith(InvalidInputError)
     })
 
     it('Invalid token', async () => {
