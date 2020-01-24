@@ -27,16 +27,9 @@ module.exports.getProfile = async ids => {
 
     try {
 
-        // wait for the execution and get the results
-        let result = await Promise.all(queries)
+        // wait for the execution and return the results
+        return await Promise.all(queries)
 
-        // reduce the results array into one object
-        result = result.reduce((acc, item) => {
-            acc[item._id.toString()] = item
-            return acc
-        }, {})
-
-        return result
     } catch (e) {
         throw new NotFoundError('Some users were not found')
     }
