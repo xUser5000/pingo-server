@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 app.use('/status', monitor())
 
 // use the logger when in development only
-if (process.env['NODE_ENV'] !== 'production') app.use(require('morgan')('dev'))
+if (process.env['NODE_ENV'] === 'development') app.use(require('morgan')('dev'))
 
 // Authentication controller
 app.use('/api/auth', authController())
