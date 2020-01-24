@@ -9,8 +9,8 @@
     "start": "node bin",
     "start:dev": "nodemon bin NODE_ENV=development",
     "test": "mocha --timeout 10000",
-    "test:all": "mocha --timeout 10000 ./test --recursive",
-    "test:debug": "mocha debug --timeout 10000"
+    "test:debug": "mocha debug --timeout 10000",
+    "test:all": "nyc mocha --timeout 10000 ./test --recursive"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -31,6 +31,7 @@
     "mocha": "^7.0.0",
     "mongodb-memory-server": "^6.2.1",
     "nodemon": "^2.0.2",
+    "nyc": "^15.0.0",
     "supertest": "^4.0.2"
   }
 }

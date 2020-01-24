@@ -15,6 +15,7 @@ const controller = async (service, res, ...args) => {
         res.send(result)
     } catch (e) {
 
+        /* istanbul ignore else */
         if (e instanceof HttpError) {
 
             if (e instanceof InvalidInputError) {

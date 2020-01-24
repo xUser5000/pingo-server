@@ -14,7 +14,7 @@ const {
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-require('../../database/mongo.test')
+require('../../setup.test')
 
 describe('Profile test', () => {
 

@@ -1,7 +1,7 @@
 const request = require('supertest')
 const { app } = require('../../../../src/app')
 
-require('../../../database/mongo.test')
+require('../../../setup.test')
 
 describe('Login route', () => {
 

@@ -8,7 +8,7 @@ const { userController } = require('./web/controller/user.controller')
 
 // middlewares
 const { monitor } = require('./web/middleware/monitor.middle')
-const { tokenAuthrizer } = require('./web/middleware/tokenAuthorizer.middle')
+const { tokenAuthorizer } = require('./web/middleware/tokenAuthorizer.middle')
 
 const app = express()
 
@@ -18,12 +18,13 @@ app.use(bodyParser.json())
 app.use('/status', monitor())
 
 // use the logger when in development only
+/* istanbul ignore if */
 if (process.env['NODE_ENV'] === 'development') app.use(require('morgan')('dev'))
 
 // Authentication controller
 app.use('/api/auth', authController())
 
 // Protected controllers
-app.use('/api/user', tokenAuthrizer(), userController())
+app.use('/api/user', tokenAuthorizer(), userController())
 
 module.exports = { app }

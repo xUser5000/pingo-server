@@ -2,7 +2,7 @@ const { authorize } = require('../../service/auth/authorize/authorize.service')
 
 const { HttpError } = require('../../service/error/HttpError')
 
-const tokenAuthrizer = (req, res, next) => {
+const tokenAuthorizer = (req, res, next) => {
 
     const token = req.headers['x-auth-token']
 
@@ -16,4 +16,4 @@ const tokenAuthrizer = (req, res, next) => {
     }
 }
 
-module.exports.tokenAuthrizer = () => tokenAuthrizer
+module.exports.tokenAuthorizer = () => tokenAuthorizer
