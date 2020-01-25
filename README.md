@@ -17,7 +17,7 @@ yarn start
 ## Run tests
 
 ```sh
-yarn run test
+yarn run test:all
 ```
 
 ## Author
