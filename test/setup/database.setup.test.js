@@ -2,7 +2,7 @@ const {
     clearDatabase,
     closeDatabase,
     connect
-} = require('../src/database/mongo.memory')
+} = require('../../src/database/mongo.memory')
 
 /**
  * Connect to a new in-memory database before running any tests.

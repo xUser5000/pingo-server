@@ -22,9 +22,12 @@ app.use('/status', monitor())
 if (process.env['NODE_ENV'] === 'development') app.use(require('morgan')('dev'))
 
 // Authentication controller
-app.use('/api/auth', authController())
+app.use('/api/public/auth', authController())
 
-// Protected controllers
-app.use('/api/user', tokenAuthorizer(), userController())
+// setup the token filter only for private controllers
+app.use('/api/private/*', tokenAuthorizer())
+
+// private controllers
+app.use('/api/private/user', userController())
 
 module.exports = { app }

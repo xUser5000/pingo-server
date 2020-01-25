@@ -13,7 +13,7 @@ const {
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-require('../../setup.test')
+require('../../setup/database.setup.test')
 
 describe('Profile test', () => {
 

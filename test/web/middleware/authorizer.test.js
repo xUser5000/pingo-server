@@ -6,13 +6,13 @@ describe('Token Authorizer Middleware', () => {
 
     it('Invalid token', done => {
         request(app)
-            .get('/api/user/anything')
+            .get('/api/private/user/anything')
             .expect(400, done)
     })
 
     it('Valid token', done => {
         request(app)
-            .get('/api/user/anything')
+            .get('/api/private/user/anything')
             .set('x-auth-token', generateToken('123'))
             .expect(404, done)
     })

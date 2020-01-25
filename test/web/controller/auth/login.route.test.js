@@ -1,12 +1,12 @@
 const request = require('supertest')
 const { app } = require('../../../../src/app')
 
-require('../../../setup.test')
+require('../../../setup/database.setup.test')
 
 describe('Login route', () => {
 
-    const LOGIN_BASE_URL = '/api/auth/login'
-    const REGISTER_BASE_URL = '/api/auth/register'
+    const LOGIN_BASE_URL = '/api/public/auth/login'
+    const REGISTER_BASE_URL = '/api/public/auth/register'
     const VALID_REGISTER_USER = {
         username: 'xUser5000',
         email: 'abdallah@gmail.com',
