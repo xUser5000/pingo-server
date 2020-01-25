@@ -5,13 +5,12 @@ const { init } = require('../../../setup/user.setup.test')
 
 require('../../../setup/database.setup.test')
 
-describe('Profile route', () => {
+describe('Profile route', async () => {
 
     const BASE_URL = '/api/private/user/profile'
+    const {token, _id} = await init()
 
     it('Invalid input', async () => {
-
-        const {token} = await init()
 
         await request(app)
             .post(BASE_URL)
@@ -29,6 +28,22 @@ describe('Profile route', () => {
             .set('x-auth-token', token)
             .send({ids: ['']})
             .expect(400)
+    })
+
+    it('User Not found', done => {
+        request(app)
+            .post(BASE_URL)
+            .set('x-auth-token', token)
+            .send({ids: ['sghehrtj']})
+            .expect(404, done)
+    })
+
+    it('Get the user correctly', done => {
+        request(app)
+            .post(BASE_URL)
+            .set('x-auth-token', token)
+            .send({ ids: [_id] })
+            .expect(200, done)
     })
 
 })
