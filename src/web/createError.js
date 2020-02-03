@@ -3,4 +3,4 @@
  * @param {String[]} errors - The error messages
  * @returns {any} Formatted response to be sent to the client
  */
-module.exports.createError = (...errors) => ({errors})
+module.exports.createError = (...errors) => ({ errors });

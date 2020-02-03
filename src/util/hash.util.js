@@ -1,11 +1,11 @@
-const { hashSync, compareSync } = require('bcryptjs')
+const { hashSync, compareSync } = require("bcryptjs");
 
 /**
  * @description Hash a given password
  * @param {String} passwrod The password to be hashed
  * @returns {String} The hash result
  */
-const hash = password => hashSync(password, 10)
+const hash = password => hashSync(password, 10);
 
 /**
  * @description Given a password and a string, it compares the two
@@ -13,6 +13,6 @@ const hash = password => hashSync(password, 10)
  * @param {String} hash The hash
  * @returns {Boolean}
  */
-const match = (password, hash) => compareSync(password, hash)
+const match = (password, hash) => compareSync(password, hash);
 
-module.exports = { hash, match }
+module.exports = { hash, match };

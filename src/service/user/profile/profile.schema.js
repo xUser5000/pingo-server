@@ -1,13 +1,9 @@
-const joi = require('joi')
-const { buildSchema } = require('../../../util/validator.util')
+const joi = require("joi");
+const { buildSchema } = require("../../../util/validator.util");
 
 module.exports.profileSchema = buildSchema({
-
-    ids: joi
-            .array()
-            .items(joi
-                    .string()
-                    .required())
-            .required()
-
-})
+  ids: joi
+    .array()
+    .items(joi.string().required())
+    .required()
+});

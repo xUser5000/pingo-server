@@ -1,11 +1,9 @@
-const { HttpError } = require('./HttpError')
+const { HttpError } = require("./HttpError");
 
 class ForbiddenError extends HttpError {
-
-    constructor (message) {
-        super(message, 403)
-    }
-
+  constructor(message) {
+    super(message, 403);
+  }
 }
 
-module.exports = { ForbiddenError }
+module.exports = { ForbiddenError };

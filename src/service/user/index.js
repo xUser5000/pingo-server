@@ -1,8 +1,8 @@
-const { getProfileFactory } = require('./profile/profile.service')
+const { getProfileFactory } = require("./profile/profile.service");
 
-const { validate } = require('../../util/validator.util')
+const { validate } = require("../../util/validator.util");
 
-const userRepo = require('../../database/repository/user.repo')
+const userRepo = require("../../database/repository/user.repo");
 
 /**
  * @description Gets the user profile info
@@ -10,4 +10,4 @@ const userRepo = require('../../database/repository/user.repo')
  * @param {String []} ids The user ids
  * @returns {User []}
  */
-module.exports.getProfile = getProfileFactory({ validate, ...userRepo })
+module.exports.getProfile = getProfileFactory({ validate, ...userRepo });

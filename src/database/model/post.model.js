@@ -1,22 +1,22 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require("mongoose");
 
 // post schema
 const postSchema = new Schema({
-    time: Number,
-    title: String,
-    image: String,
-    content: String,
-    likes: [String],
-    comments: [commentSchema]
-})
+  time: Number,
+  title: String,
+  image: String,
+  content: String,
+  likes: [String],
+  comments: [commentSchema]
+});
 
 // comment schema
 const commentSchema = new Schema({
-    time: String,
-    author: String,
-    content: String
-})
+  time: String,
+  author: String,
+  content: String
+});
 
-const postModel = model('post', postSchema)
+const postModel = model("post", postSchema);
 
-module.exports = { postModel }
+module.exports = { postModel };
