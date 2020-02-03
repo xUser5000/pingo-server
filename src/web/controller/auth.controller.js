@@ -1,8 +1,7 @@
 const router = require('express').Router()
 const { controller } = require('../controller')
 
-const { register } = require('../../service/auth/register/register.service')
-const { login } = require('../../service/auth/login/login.service')
+const { register, login } = require('../../service/auth')
 
 router.post('/register', (req, res) => controller(res)(register)(req.body))
 

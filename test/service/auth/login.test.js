@@ -1,10 +1,10 @@
 const chai = require('chai')
 const chaiAsPromised = require("chai-as-promised");
 
-const { NotFoundError } = require('../../../src/service/error/NotFoundError')
-const { InvalidInputError } = require('../../../src/service/error/InvalidInputError')
-const { login } = require('../../../src/service/auth/login/login.service')
-const { register } = require('../../../src/service/auth/register/register.service')
+const { NotFoundError } = require('../../../src/error/NotFoundError')
+const { InvalidInputError } = require('../../../src/error/InvalidInputError')
+
+const { login, register } = require('../../../src/service/auth')
 
 chai.use(chaiAsPromised);
 const expect = chai.expect;

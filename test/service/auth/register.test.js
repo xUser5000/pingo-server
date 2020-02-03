@@ -1,8 +1,8 @@
 const chai = require('chai')
 const chaiAsPromised = require("chai-as-promised");
-const { InvalidInputError } = require('../../../src/service/error/InvalidInputError')
-const { ForbiddenError } = require('../../../src/service/error/ForbiddenError')
-const { register } = require('../../../src/service/auth/register/register.service')
+const { InvalidInputError } = require('../../../src/error/InvalidInputError')
+const { ForbiddenError } = require('../../../src/error/ForbiddenError')
+const { register } = require('../../../src/service/auth')
 const { findUserByEmail } = require('../../../src/database/repository/user.repo')
 
 chai.use(chaiAsPromised);

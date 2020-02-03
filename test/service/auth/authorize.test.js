@@ -4,10 +4,10 @@ const chaiAsPromised = require("chai-as-promised")
 chai.use(chaiAsPromised)
 const expect = chai.expect
 
-const { authorize } = require('../../../src/service/auth/authorize/authorize.service')
+const { authorize } = require('../../../src/service/auth')
 
-const { InvalidInputError } = require('../../../src/service/error/InvalidInputError')
-const { UnAuthorizedError } = require('../../../src/service/error/UnAuthorizedError')
+const { InvalidInputError } = require('../../../src/error/InvalidInputError')
+const { UnAuthorizedError } = require('../../../src/error/UnAuthorizedError')
 
 const { generateToken } = require('../../../src/util/token.util')
 

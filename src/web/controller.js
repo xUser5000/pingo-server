@@ -1,5 +1,5 @@
-const { HttpError } = require('../service/error/HttpError')
-const { InvalidInputError } = require('../service/error/InvalidInputError')
+const { HttpError } = require('../error/HttpError')
+const { InvalidInputError } = require('../error/InvalidInputError')
 const { createError } = require('./createError')
 
 /**

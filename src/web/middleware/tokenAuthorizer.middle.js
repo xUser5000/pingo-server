@@ -1,6 +1,6 @@
-const { authorize } = require('../../service/auth/authorize/authorize.service')
+const { authorize } = require('../../service/auth')
 
-const { HttpError } = require('../../service/error/HttpError')
+const { HttpError } = require('../../error/HttpError')
 
 const tokenAuthorizer = async (req, res, next) => {
 
