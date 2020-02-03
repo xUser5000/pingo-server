@@ -1,25 +1,21 @@
-const { app } = require('./src/app')
-const { config } = require('dotenv')
-const { connect } = require('./src/database/mongo')
+const { app } = require("./src/app");
+const { config } = require("dotenv");
+const { connect } = require("./src/database/mongo");
 
 // setup env vars
-config()
+config();
 
 // setup the databse
 connect()
-    .then(() => console.log('MongoDB connected'))
-    .catch(error => { throw new Error(error) })
+  .then(() => console.log("MongoDB connected"))
+  .catch(error => {
+    throw new Error(error);
+  });
 
 // setup port
-const PORT = process.env['PORT'] || 3000
+const PORT = process.env["PORT"] || 3000;
 
 // start the server
 app.listen(PORT, () => {
-    console.log(`Server started at port ${PORT}`)
-})
-
-/**
- * Exit the node process when there is an unhandled error
- */
-process.on('unhandledRejection', (reason, p) => { throw reason });
-process.on('uncaughtException', process.exit(1));
+  console.log(`Server started at port ${PORT}`);
+});
