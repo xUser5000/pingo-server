@@ -17,3 +17,9 @@ const PORT = process.env['PORT'] || 3000
 app.listen(PORT, () => {
     console.log(`Server started at port ${PORT}`)
 })
+
+/**
+ * Exit the node process when there is an unhandled error
+ */
+process.on('unhandledRejection', (reason, p) => { throw reason });
+process.on('uncaughtException', process.exit(1));
