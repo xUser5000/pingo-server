@@ -27,10 +27,18 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "husky": "^4.2.1",
     "mocha": "^7.0.0",
     "mongodb-memory-server": "^6.2.1",
     "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
+    "prettier": "1.19.1",
+    "pretty-quick": "^2.0.1",
     "supertest": "^4.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
