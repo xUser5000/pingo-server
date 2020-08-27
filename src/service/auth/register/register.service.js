@@ -3,13 +3,22 @@ const { registerSchema } = require("./register.schema");
 const { InvalidInputError } = require("../../../error/InvalidInputError");
 const { ForbiddenError } = require("../../../error/ForbiddenError");
 
-module.exports.registerFactory = ({
-  validate,
+const {
   findUserByEmail,
   findUserByUsername,
   saveUser,
-  hash
-}) => async req => {
+} = require("../../../database/repository/user.repo");
+
+const { validate } = require("../../../util/validator.util");
+const { hash } = require("../../../util/hash.util");
+
+/**
+ * @description Creates a new user account
+ * @async
+ * @param {User} req The request object
+ * @returns {User} The new account
+ */
+module.exports.register = async (req) => {
   // preventing further modification of the object
   req = Object.freeze(req);
 

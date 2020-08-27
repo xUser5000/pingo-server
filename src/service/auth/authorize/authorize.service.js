@@ -3,10 +3,16 @@ const { authorizeSchema } = require("./authorize.schema");
 const { InvalidInputError } = require("../../../error/InvalidInputError");
 const { UnAuthorizedError } = require("../../../error/UnAuthorizedError");
 
-module.exports.authorizeFactory = ({
-  validate,
-  getDataFromToken
-}) => async token => {
+const { validate } = require("../../../util/validator.util");
+const { getDataFromToken } = require("../../../util/token.util");
+
+/**
+ * Authorize a given token
+ * @async
+ * @param {String} token The token to be authorized
+ * @returns {any}
+ */
+module.exports.authorize = async (token) => {
   // validation
   const result = await validate({ token }, authorizeSchema);
   if (result) {

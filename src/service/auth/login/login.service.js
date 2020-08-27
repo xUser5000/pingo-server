@@ -3,12 +3,19 @@ const { loginSchema } = require("./login.schema");
 const { InvalidInputError } = require("../../../error/InvalidInputError");
 const { NotFoundError } = require("../../../error/NotFoundError");
 
-module.exports.loginFactory = ({
-  validate,
-  match,
-  generateToken,
-  findUserByEmail
-}) => async req => {
+const { findUserByEmail } = require("../../../database/repository/user.repo");
+
+const { validate } = require("../../../util/validator.util");
+const { match } = require("../../../util/hash.util");
+const { generateToken } = require("../../../util/token.util");
+
+/**
+ * @description Generates a token based on the user id, returns the user info
+ * @async
+ * @param {loginSchema} req The request object
+ * @returns {User}
+ */
+module.exports.login = async (req) => {
   // prevents further modification of the object
   req = Object.freeze(req);
 

@@ -7,10 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node bin",
-    "start:dev": "nodemon bin NODE_ENV=development",
-    "test": "mocha --timeout 10000",
-    "test:debug": "mocha debug --timeout 10000",
-    "test:all": "nyc mocha --timeout 10000 ./test --recursive"
+    "start:dev": "nodemon bin NODE_ENV=development"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -28,10 +25,9 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "husky": "^4.2.1",
-    "mocha": "^7.0.0",
+    "mocha": "^8.1.2",
     "mongodb-memory-server": "^6.2.1",
     "nodemon": "^2.0.2",
-    "nyc": "^15.0.0",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.1",
     "supertest": "^4.0.2"
