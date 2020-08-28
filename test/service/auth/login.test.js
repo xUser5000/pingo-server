@@ -1,66 +1,54 @@
-const chai = require('chai')
-const chaiAsPromised = require("chai-as-promised");
+const { NotFoundError } = require("../../../src/error/NotFoundError");
+const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 
-const { NotFoundError } = require('../../../src/error/NotFoundError')
-const { InvalidInputError } = require('../../../src/error/InvalidInputError')
+const { login, register } = require("../../../src/service/auth");
 
-const { login, register } = require('../../../src/service/auth')
+require("../../setup/database.setup.test");
 
-chai.use(chaiAsPromised);
-const expect = chai.expect;
+describe("Login test", () => {
+  it("Validation testing", () => {
+    const arr = [];
+    arr[0] = { email: "", password: "" };
+    arr[1] = { email: "abdallah@gmail.com", password: "" };
+    arr[2] = { email: "abdallah@gmail.com" };
+    arr[3] = { email: "abdallah@.com", password: "123456789" };
+    arr[4] = { email: "abdallah", password: "123456789" };
+    arr[5] = { email: "", password: "123456789" };
+    arr[6] = { password: "123456789" };
+    arr[7] = {};
 
-require('../../setup/database.setup.test')
+    arr.forEach(async obj => {
+      await expect(register(obj)).rejects.toThrow(InvalidInputError);
+    });
+  });
 
-describe('Login test', () => {
+  it("Did not find the user", async () => {
+    const user = { email: "abdallah@gmail.com", password: "1234567890" };
+    await expect(login(user)).rejects.toThrow(NotFoundError);
+  });
 
-    it('Validation testing', async () => {
-        const user1 = { email: '', password: '' }
-        const user3 = { email: 'abdallah@gmail.com', password: '' }
-        const user4 = { email: 'abdallah@gmail.com' }
-        const user6 = { email: 'abdallah@.com', password: '123456789' }
-        const user7 = { email: 'abdallah', password: '123456789' }
-        const user8 = { email: '', password: '123456789' }
-        const user9 = { password: '123456789' }
-        const user10 = {}
+  it("Password is not correct", async () => {
+    const user = { email: "abdallah@gmail.com", password: "123456789" };
+    await register({ ...user, username: "3by9nv9nbv" });
 
-        await expect(login(user1)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user3)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user4)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user6)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user7)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user8)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user9)).to.be.rejectedWith(InvalidInputError)
-        await expect(login(user10)).to.be.rejectedWith(InvalidInputError)
-    })
+    await expect(
+      login({ email: "abdallah@gmail.com", password: "123" })
+    ).rejects.toThrow(NotFoundError);
+  });
 
-    it('Did not find the user', async () => {
-        const user = { email: 'abdallah@gmail.com', password: '1234567890' }
-        await expect(login(user)).to.be.rejectedWith(NotFoundError)
-    })
+  it("Login correctly", async () => {
+    const user = {
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    const document = await register({
+      ...user,
+      username: "abdallah500"
+    });
 
-    it('Password is not correct', async () => {
-        const user = { email: 'abdallah@gmail.com', password: '123456789' }
-        await register({...user, username: '3by9nv9nbv'})
+    const result = await login(user);
 
-        await expect(login({ email: 'abdallah@gmail.com', password: '123' }))
-            .to.be.rejectedWith(NotFoundError)
-    })
-
-    it('Login correctly', async () => {
-        const user = {
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        const document = await register({
-            ...user,
-            username: 'abdallah500'
-        })
-
-        const result = await login(user)
-
-        expect(result).to.have.property('user')
-        expect(result).to.have.property('token')
-        expect(result.token).to.be.a('string')
-    })
-
-})
+    expect(result).toHaveProperty("user");
+    expect(result).toHaveProperty("token");
+  });
+});

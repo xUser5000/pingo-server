@@ -1,6 +1,6 @@
 const { authorize } = require("../../service/auth");
 
-const { HttpError } = require("../../error/HttpError");
+const { HttpError } = require("../../error");
 
 const tokenAuthorizer = async (req, res, next) => {
   const token = req.headers["x-auth-token"];

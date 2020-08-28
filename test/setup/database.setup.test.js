@@ -1,20 +1,24 @@
-const {
-    clearDatabase,
-    closeDatabase,
-    connect
-} = require('../../src/database/mongo.memory')
+const mongoose = require("mongoose");
+const { MongoMemoryServer } = require("mongodb-memory-server");
 
-/**
- * Connect to a new in-memory database before running any tests.
- */
-before(async () => await connect());
+// May require additional time for downloading MongoDB binaries
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
+const opts = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+};
 
-/**
- * Clear all test data after every test.
- */
-afterEach(async () => await clearDatabase());
+let mongoServer;
 
-/**
- * Remove and close the db and server.
- */
-after(async () => await closeDatabase());
+beforeEach(async () => {
+  mongoServer = new MongoMemoryServer();
+  const mongoUri = await mongoServer.getUri();
+  await mongoose.connect(mongoUri, opts, err => {
+    if (err) console.error(err);
+  });
+});
+
+afterEach(async () => {
+  await mongoose.disconnect();
+  await mongoServer.stop();
+});

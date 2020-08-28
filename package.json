@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node bin",
     "start:dev": "nodemon bin NODE_ENV=development",
-    "test": "jest --runInBand ./test"
+    "test": "jest",
+    "test:all": "jest service util"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -23,9 +24,10 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.10",
     "husky": "^4.2.1",
     "jest": "^26.4.2",
-    "mongodb-memory-server": "^6.2.1",
+    "mongodb-memory-server": "^6.6.6",
     "nodemon": "^2.0.2",
     "prettier": "1.19.1",
     "pretty-quick": "^2.0.1"

@@ -1,61 +1,52 @@
-const chai = require('chai')
-const chaiAsPromised = require("chai-as-promised");
+const { NotFoundError } = require("../../../src/error/NotFoundError");
+const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 
-const { NotFoundError } = require('../../../src/error/NotFoundError')
-const { InvalidInputError } = require('../../../src/error/InvalidInputError')
+const { getProfile } = require("../../../src/service/user");
 
-const { getProfile } = require('../../../src/service/user')
+const { saveUser } = require("../../../src/database/repository/user.repo");
 
-const {
-    saveUser
-} = require('../../../src/database/repository/user.repo')
+require("../../setup/database.setup.test");
 
-chai.use(chaiAsPromised);
-const expect = chai.expect;
+describe("Profile test", () => {
+  it("Validation", () => {
+    const arr = [];
+    arr[0] = null;
+    arr[1] = [];
+    arr[2] = [""];
+    arr[3] = ["", ""];
 
-require('../../setup/database.setup.test')
+    arr.forEach(async obj => {
+      await expect(getProfile(obj)).rejects.toThrow(InvalidInputError);
+    });
+  });
 
-describe('Profile test', () => {
+  it("User not found", async () => {
+    let user = {
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    user = await saveUser(user);
 
-    it('Validation', async () => {
-        const test0 = null
-        const test1 = []
-        const test2 = ['']
-        const test3 = ['', '']
+    await expect(getProfile(["5e2137ca9bt29c0ea652997b"])).rejects.toThrow(
+      NotFoundError
+    );
+  });
 
-        await expect(getProfile(test0)).to.be.rejectedWith(InvalidInputError)
-        await expect(getProfile(test1)).to.be.rejectedWith(InvalidInputError)
-        await expect(getProfile(test2)).to.be.rejectedWith(InvalidInputError)
-        await expect(getProfile(test3)).to.be.rejectedWith(InvalidInputError)
-    })
+  it("Get profile correctly", async () => {
+    let user1 = {
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    let user2 = {
+      email: "ahmed@gmail.com",
+      password: "123456789"
+    };
+    user1 = await saveUser(user1);
+    user2 = await saveUser(user2);
 
-    it('User not found', async () => {
-        let user = {
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        user = await saveUser(user)
-
-        await expect(getProfile(['5e2137ca9bt29c0ea652997b']))
-            .to.be.rejectedWith(NotFoundError)
-    })
-
-    it('Get profile correctly', async () => {
-        let user1 = {
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        let user2 = {
-            email: 'ahmed@gmail.com',
-            password: '123456789'
-        }
-        user1 = await saveUser(user1)
-        user2 = await saveUser(user2)
-
-        await expect(getProfile([user1.id, user2.id])).to.not.be.rejected
-        await expect(getProfile([user1.id, user2.id])).to.eventually.have.lengthOf(2)
-        await expect(getProfile([user1.id])).to.not.be.rejected
-        await expect(getProfile([user1.id])).to.eventually.have.lengthOf(1)
-    })
-
-})
+    await expect(getProfile([user1.id, user2.id])).rejects;
+    await expect(getProfile([user1.id, user2.id])).resolves.toHaveLength(2);
+    await expect(getProfile([user1.id])).resolves;
+    await expect(getProfile([user1.id])).resolves.toHaveLength(1);
+  });
+});

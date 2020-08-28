@@ -3,9 +3,9 @@ const { profileSchema } = require("./profile.schema");
 const { NotFoundError } = require("../../../error/NotFoundError");
 const { InvalidInputError } = require("../../../error/InvalidInputError");
 
-const { findUserById } = require("../../database/repository/user.repo");
+const { findUserById } = require("../../../database/repository/user.repo");
 
-const { validate } = require("../../util/validator.util");
+const { validate } = require("../../../util/validator.util");
 
 /**
  * @description Gets the user profile info
@@ -13,7 +13,7 @@ const { validate } = require("../../util/validator.util");
  * @param {String []} ids The user ids
  * @returns {User []}
  */
-module.exports.getProfile = async (ids) => {
+module.exports.getProfile = async ids => {
   // validation
   const validationResult = await validate({ ids }, profileSchema);
   if (validationResult) {
@@ -21,7 +21,7 @@ module.exports.getProfile = async (ids) => {
   }
 
   // execute all the queries
-  let queries = ids.map((id) => findUserById(id));
+  let queries = ids.map(id => findUserById(id));
 
   try {
     // wait for the execution and return the results

@@ -1,36 +1,27 @@
-const chai = require('chai')
-const chaiAsPromised = require("chai-as-promised")
+const { authorize } = require("../../../src/service/auth");
 
-chai.use(chaiAsPromised)
-const expect = chai.expect
+const { InvalidInputError } = require("../../../src/error/InvalidInputError");
+const { UnAuthorizedError } = require("../../../src/error/UnAuthorizedError");
 
-const { authorize } = require('../../../src/service/auth')
+const { generateToken } = require("../../../src/util/token.util");
 
-const { InvalidInputError } = require('../../../src/error/InvalidInputError')
-const { UnAuthorizedError } = require('../../../src/error/UnAuthorizedError')
+describe("Authorization test", () => {
+  it("Malformed Token", async () => {
+    await expect(authorize("")).rejects.toThrow(InvalidInputError);
+  });
 
-const { generateToken } = require('../../../src/util/token.util')
+  it("Invalid token", async () => {
+    const data = "1234";
+    let token = generateToken(data);
+    token = token.replace("g", "a");
 
-describe('Authorization test', () => {
+    await expect(authorize(token)).rejects.toThrow(UnAuthorizedError);
+  });
 
-    it('Malformed Token', async () => {
-        await expect(authorize('')).to.be.rejectedWith(InvalidInputError)
-    })
+  it("Authorize a token", async () => {
+    const data = "1234";
+    const token = generateToken(data);
 
-    it('Invalid token', async () => {
-
-        const data = '1234'
-        let token = generateToken(data)
-        token = token.replace('g', 'a')
-
-        await expect(authorize(token)).to.be.rejectedWith(UnAuthorizedError)
-
-    })
-
-    it('Authorize a token', async () => {
-        const data = '1234'
-        const token = generateToken(data)
-
-        return expect(authorize(token)).to.eventually.equal(data)
-    })
-})
+    await expect(authorize(token)).resolves.toBe(data);
+  });
+});

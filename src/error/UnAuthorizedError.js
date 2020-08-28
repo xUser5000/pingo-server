@@ -1,4 +1,4 @@
-const { HttpError } = require("./HttpError");
+const { HttpError } = require("./");
 
 class UnAuthorizedError extends HttpError {
   constructor(message) {

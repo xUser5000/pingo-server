@@ -1,4 +1,4 @@
-const { HttpError } = require("../error/HttpError");
+const { HttpError } = require("../error");
 const { InvalidInputError } = require("../error/InvalidInputError");
 const { createError } = require("./createError");
 

@@ -1,113 +1,102 @@
-const chai = require('chai')
-const chaiAsPromised = require("chai-as-promised");
-const { InvalidInputError } = require('../../../src/error/InvalidInputError')
-const { ForbiddenError } = require('../../../src/error/ForbiddenError')
-const { register } = require('../../../src/service/auth')
-const { findUserByEmail } = require('../../../src/database/repository/user.repo')
+const { InvalidInputError } = require("../../../src/error/InvalidInputError");
+const { ForbiddenError } = require("../../../src/error/ForbiddenError");
 
-chai.use(chaiAsPromised);
-const expect = chai.expect;
+const { register } = require("../../../src/service/auth");
 
-require('../../setup/database.setup.test')
+const {
+  findUserByEmail
+} = require("../../../src/database/repository/user.repo");
 
-describe('Create a new account', () => {
+require("../../setup/database.setup.test");
 
-    it('Validation testing', async () => {
-        const user1 = {
-            username: '',
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        const user2 = {
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        const user3 = {
-            username: 'xUser5000',
-            password: '123456789'
-        }
-        const user4 = {
-            username: 'xUser5000',
-            email: 'abdallah@gmail.com',
-        }
-        const user5 = {
-            username: '121',
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        const user6 = {
-            username: 'xUser5000',
-            email: 'abdallah.com',
-            password: '123456789'
-        }
-        const user7 = {
-            username: 'xUser5000',
-            email: 'abdallah',
-            password: '123456789'
-        }
-        const user8 = {
-            username: 'xUser5000',
-            email: 'abdallah@.com',
-            password: '123456789'
-        }
-        const user9 = {
-            username: 'xUser5000',
-            email: 'abdallah@gmail.com',
-            password: '123'
-        }
+describe("Create a new account", () => {
+  it("Validation testing", async () => {
+    const arr = [];
+    arr[0] = {
+      username: "",
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    arr[1] = {
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    arr[2] = {
+      username: "xUser5000",
+      password: "123456789"
+    };
+    arr[3] = {
+      username: "xUser5000",
+      email: "abdallah@gmail.com"
+    };
+    arr[4] = {
+      username: "121",
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    arr[5] = {
+      username: "xUser5000",
+      email: "abdallah.com",
+      password: "123456789"
+    };
+    arr[6] = {
+      username: "xUser5000",
+      email: "abdallah",
+      password: "123456789"
+    };
+    arr[7] = {
+      username: "xUser5000",
+      email: "abdallah@.com",
+      password: "123456789"
+    };
+    arr[8] = {
+      username: "xUser5000",
+      email: "abdallah@gmail.com",
+      password: "123"
+    };
 
-        const user10 = {}
+    arr[9] = {};
 
-        expect(register(user1)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user2)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user3)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user4)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user5)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user6)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user7)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user8)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user9)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user9)).to.be.rejectedWith(InvalidInputError)
-        expect(register(user10)).to.be.rejectedWith(InvalidInputError)
-    })
+    arr.forEach(async obj => {
+      await expect(register(obj)).rejects.toThrow(InvalidInputError);
+    });
+  });
 
-    it('Email address is already in use', async () => {
-        const user = {
-            username: 'abdallah5000',
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        await register(user)
+  it("Email address is already in use", async () => {
+    const user = {
+      username: "abdallah5000",
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    await register(user);
 
-        expect((register(user))).to.be.rejectedWith(ForbiddenError)
-    })
+    await expect(register(user)).rejects.toThrow(ForbiddenError);
+  });
 
+  it("Username is already in use", async () => {
+    const user = {
+      username: "abdallah5000",
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    await register(user);
 
-    it('Username address is already in use', async () => {
-        const user = {
-            username: 'abdallah5000',
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        await register(user)
+    user.email = "hehehe@mail.com";
+    await expect(register(user)).rejects.toThrow(ForbiddenError);
+  });
 
-        user.email = 'hehehe@mail.com'
-        expect((register(user))).to.be.rejectedWith(ForbiddenError)
-    })
-
-    it('Create account correctly', async () => {
-        const user = {
-            username: 'abdallah5000',
-            email: 'abdallah@gmail.com',
-            password: '123456789'
-        }
-        const result = await register(user)
-        expect(findUserByEmail(user.email)).to.eventually.not.equal(null)
-        expect(result).to.has.property('username', user.username)
-        expect(result).to.has.property('email', user.email)
-        expect(result).to.has.property('password')
-        expect(result).to.has.property('bio')
-        expect(result).to.has.property('joined')
-    })
-
-})
+  it("Create account correctly", async () => {
+    const user = {
+      username: "abdallah5000",
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
+    const result = await register(user);
+    await expect(findUserByEmail(user.email)).resolves.not.toBe(null);
+    expect(result).toHaveProperty("username", user.username);
+    expect(result).toHaveProperty("email", user.email);
+    expect(result).toHaveProperty("password");
+    expect(result).toHaveProperty("bio");
+    expect(result).toHaveProperty("joined");
+  });
+});
