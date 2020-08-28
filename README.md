@@ -2,31 +2,31 @@
 
 > A social network back-end infrastructure
 
-## Install
+## Install All dependencies
 
 ```sh
-yarn install
+npm install
 ```
 
 ## Usage
 
 ```sh
-yarn start
+npm start
 ```
 
 ## Run tests
 
 ```sh
-yarn run test:all
+npm run test:all
 ```
 
 ## Author
 
 👤 **Abdallah Ahmed**
 
-* Github: [@xUser5000](https://github.com/xUser5000)
-* Facebook: [@AbdallahAhmedRabi3](https://www.facebook.com/AbdallahAhmedRabi3)
+- Github: [@xUser5000](https://github.com/xUser5000)
+- Facebook: [@AbdallahAhmedRabi3](https://www.facebook.com/AbdallahAhmedRabi3)
 
 ## Show your support
 
-Give a ⭐️ if this project helped you!
+Give a ⭐️ if this project Appeals to you!
