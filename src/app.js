@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const compression = require("compression");
+const morgan = require("morgan");
 
 // controllers
 const { authController } = require("./web/controller/auth.controller");
@@ -12,6 +13,7 @@ const { tokenAuthorizer } = require("./web/middleware/tokenAuthorizer.middle");
 
 const app = express();
 
+app.use(morgan("dev"));
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
