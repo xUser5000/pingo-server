@@ -41,12 +41,15 @@ describe("Profile test", () => {
       email: "ahmed@gmail.com",
       password: "123456789"
     };
-    user1 = await saveUser(user1);
-    user2 = await saveUser(user2);
+    obj1 = await saveUser(user1);
+    obj2 = await saveUser(user2);
 
-    await expect(getProfile([user1.id, user2.id])).rejects;
-    await expect(getProfile([user1.id, user2.id])).resolves.toHaveLength(2);
-    await expect(getProfile([user1.id])).resolves;
-    await expect(getProfile([user1.id])).resolves.toHaveLength(1);
+    await expect(getProfile([obj1._id.toString(), obj2._id.toString()]))
+      .rejects;
+    await expect(
+      getProfile([obj1._id.toString(), obj2._id.toString()])
+    ).resolves.toHaveLength(2);
+    await expect(getProfile([obj1._id.toString()])).resolves;
+    await expect(getProfile([obj1._id.toString()])).resolves.toHaveLength(1);
   });
 });
