@@ -17,7 +17,7 @@ module.exports.getProfile = async ids => {
   // validation
   const validationResult = await validate({ ids }, profileSchema);
   if (validationResult) {
-    throw new InvalidInputError("Invalid input");
+    throw new InvalidInputError(validationResult);
   }
 
   // execute all the queries
