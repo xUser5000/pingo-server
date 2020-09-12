@@ -1,6 +1,11 @@
 const { userModel } = require("../model/user.model");
 
 /**
+ * @description Creates the required indexes at runtime
+ */
+const createIndexes = () => userModel.createIndexes();
+
+/**
  * @param {String} id The id of the user
  * @returns {User}
  */
@@ -26,15 +31,28 @@ const findUserByUsername = username => userModel.findOne({ username }).lean();
 const saveUser = user => userModel.create(user);
 
 /**
+ * @description Searches for users given a query string
+ * @param {String} query
+ * @returns {Array} List of users sorted according to their text score
+ */
+const search = query =>
+  userModel
+    .find({ $text: { $search: query } }, { score: { $meta: "textScore" } })
+    .sort({ score: { $meta: "textScore" } })
+    .lean();
+
+/**
  * @description Deletes all users in the database
  */
 const deleteAllUsers = () => userModel.deleteMany({});
 
 /* Exports */
 module.exports = {
+  createIndexes,
   findUserById,
   findUserByEmail,
   findUserByUsername,
   saveUser,
-  deleteAllUsers
+  deleteAllUsers,
+  search
 };

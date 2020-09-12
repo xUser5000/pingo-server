@@ -13,6 +13,19 @@ const userSchema = new Schema({
   following: [String]
 });
 
+userSchema.index(
+  {
+    username: "text",
+    bio: "text"
+  },
+  {
+    weights: {
+      name: 3,
+      bio: 1
+    }
+  }
+);
+
 const userModel = model("user", userSchema);
 
 module.exports = { userModel };

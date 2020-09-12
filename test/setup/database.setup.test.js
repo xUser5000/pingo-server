@@ -5,7 +5,8 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 const opts = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 };
 
 let mongoServer;

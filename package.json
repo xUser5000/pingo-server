@@ -8,8 +8,8 @@
   "scripts": {
     "start": "node bin",
     "start:dev": "nodemon bin NODE_ENV=development",
-    "test": "jest",
-    "test:all": "jest service util"
+    "test": "jest -i",
+    "test:all": "jest -i service util"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
