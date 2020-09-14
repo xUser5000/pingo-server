@@ -3,9 +3,8 @@ const { Schema, model } = require("mongoose");
 // post schema
 const postSchema = new Schema({
   time: Number,
-  title: String,
-  image: String,
   content: String,
+  image: String,
   likes: [String],
   comments: [commentSchema]
 });
@@ -16,6 +15,9 @@ const commentSchema = new Schema({
   author: String,
   content: String
 });
+
+// index the content of the post
+postSchema.index({ content: "text" });
 
 const postModel = model("post", postSchema);
 
