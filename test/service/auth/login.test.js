@@ -1,9 +1,9 @@
+require("../../test.setup");
+
 const { NotFoundError } = require("../../../src/error/NotFoundError");
 const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 
 const { login, register } = require("../../../src/service/auth");
-
-require("../../setup/database.setup.test");
 
 describe("Login test", () => {
   it("Validation testing", () => {
@@ -16,6 +16,7 @@ describe("Login test", () => {
     arr[5] = { email: "", password: "123456789" };
     arr[6] = { password: "123456789" };
     arr[7] = {};
+    arr[8] = { email: " ", password: " " };
 
     arr.forEach(async obj => {
       await expect(register(obj)).rejects.toThrow(InvalidInputError);

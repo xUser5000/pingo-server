@@ -8,7 +8,7 @@ const {
   createIndexes
 } = require("../../../src/database/repository/user.repo");
 
-require("../../setup/database.setup.test");
+require("../../test.setup");
 
 describe("Search for users", () => {
   it("Validation", async () => {

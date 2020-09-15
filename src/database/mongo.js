@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 // DB config
-const URI = process.env["DB_URI"] || "mongodb://localhost/pingo";
+const URI = process.env["DB_URI"];
 
 const connect = () =>
   mongoose.connect(URI, {

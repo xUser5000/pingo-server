@@ -1,6 +1,6 @@
 const { hash, match } = require("../../src/util/hash.util");
 
-describe("Hashing util test suite", () => {
+describe("Hash util", () => {
   const password = "123456789";
 
   it("Hashing passwords", () => {

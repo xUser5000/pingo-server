@@ -1,3 +1,5 @@
+require("../../test.setup");
+
 const { NotFoundError } = require("../../../src/error/NotFoundError");
 const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 
@@ -5,15 +7,13 @@ const { getProfile } = require("../../../src/service/user");
 
 const { saveUser } = require("../../../src/database/repository/user.repo");
 
-require("../../setup/database.setup.test");
-
 describe("Profile test", () => {
   it("Validation", () => {
     const arr = [];
     arr[0] = null;
     arr[1] = [];
     arr[2] = [""];
-    arr[3] = ["", ""];
+    arr[3] = ["", " "];
 
     arr.forEach(async obj => {
       await expect(getProfile(obj)).rejects.toThrow(InvalidInputError);

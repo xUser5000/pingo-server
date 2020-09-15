@@ -1,3 +1,5 @@
+require("../test.setup");
+
 const {
   generateToken,
   getDataFromToken

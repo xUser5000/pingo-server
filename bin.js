@@ -1,21 +1,20 @@
-const { app } = require("./src/app");
-const { config } = require("dotenv");
-const { connect } = require("./src/database/mongo");
-
 // setup env vars
-config();
+require("dotenv").config();
+
+const { app } = require("./src/app");
+const { connect } = require("./src/database/mongo");
 
 // setup the databse
 connect()
-  .then(() => console.log("MongoDB connected"))
-  .catch(error => {
-    throw new Error(error);
-  });
+  .then(() => {
+    console.log("MongoDB Connected");
 
-// setup port
-const PORT = process.env["PORT"] || 3000;
+    // setup port
+    const PORT = process.env["PORT"];
 
-// start the server
-app.listen(PORT, () => {
-  console.log(`Server started at port ${PORT}`);
-});
+    // start the server
+    app.listen(PORT, () => {
+      console.log(`Server started at port ${PORT}`);
+    });
+  })
+  .catch(error => console.log(error));

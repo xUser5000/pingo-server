@@ -1,13 +1,13 @@
 const { sign, verify } = require("jsonwebtoken");
 
-const PRIVATE_KEY = process.env["PRIVATE_KEY"] || "123456";
+const TOKEN_SECRET = process.env["TOKEN_SECRET"];
 
 /**
  * @description Generates a new token using a specified payload
  * @param {any} data The payload to be encoded
  * @returns {String}
  */
-const generateToken = data => sign(data, PRIVATE_KEY);
+const generateToken = data => sign(data, TOKEN_SECRET);
 
 /**
  * @description Decode a given token to get the payload
@@ -16,7 +16,7 @@ const generateToken = data => sign(data, PRIVATE_KEY);
  */
 const getDataFromToken = token => {
   try {
-    return verify(token, PRIVATE_KEY);
+    return verify(token.trim(), TOKEN_SECRET);
   } catch (e) {
     return null;
   }

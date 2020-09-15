@@ -1,3 +1,5 @@
+require("../../test.setup");
+
 const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 const { ForbiddenError } = require("../../../src/error/ForbiddenError");
 
@@ -6,8 +8,6 @@ const { register } = require("../../../src/service/auth");
 const {
   findUserByEmail
 } = require("../../../src/database/repository/user.repo");
-
-require("../../setup/database.setup.test");
 
 describe("Create a new account", () => {
   it("Validation testing", async () => {
@@ -54,8 +54,13 @@ describe("Create a new account", () => {
       email: "abdallah@gmail.com",
       password: "123"
     };
+    arr[9] = {
+      username: " ",
+      email: "abdallah@gmail.com",
+      password: "123456789"
+    };
 
-    arr[9] = {};
+    arr[10] = {};
 
     arr.forEach(async obj => {
       await expect(register(obj)).rejects.toThrow(InvalidInputError);
