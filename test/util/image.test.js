@@ -14,7 +14,7 @@ describe("Image Util", () => {
     );
     const url = await upload(data);
 
-    expect(url != null && url != undefined && url != "").toBe(true);
+    expect(url !== null && url !== undefined && url !== "").toBe(true);
 
     const res = await fetch(url);
 
@@ -22,7 +22,7 @@ describe("Image Util", () => {
     expect(res.status).toBe(200);
   });
 
-  it("Is Image", () => {
+  it("Is Image", async () => {
     const file = fs.readFileSync(
       path.resolve(__dirname, "files", "pdf.base64.txt"),
       "utf-8"
@@ -32,7 +32,7 @@ describe("Image Util", () => {
       "utf-8"
     );
 
-    expect(isImage(file)).toBe(false);
-    expect(isImage(image)).toBe(true);
+    await expect(isImage(file)).resolves.toBe(false);
+    await expect(isImage(image)).resolves.toBe(true);
   });
 });
