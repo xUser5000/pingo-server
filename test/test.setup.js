@@ -8,6 +8,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 600000;
 const opts = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
   useCreateIndex: true
 };
 
