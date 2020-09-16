@@ -17,7 +17,7 @@ npm start
 ## Run tests
 
 ```sh
-npm run test:all
+npm run test
 ```
 
 ## Author
@@ -29,4 +29,4 @@ npm run test:all
 
 ## Show your support
 
-Give a ⭐️ if this project Appeals to you!
+Give a ⭐️ if you like this project
