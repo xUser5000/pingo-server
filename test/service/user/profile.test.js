@@ -8,16 +8,15 @@ const { getProfile } = require("../../../src/service/user");
 const { saveUser } = require("../../../src/database/repository/user.repo");
 
 describe("Profile test", () => {
-  it("Validation", () => {
+  it("Validation", async () => {
     const arr = [];
     arr[0] = null;
     arr[1] = [];
     arr[2] = [""];
     arr[3] = ["", " "];
 
-    arr.forEach(async obj => {
+    for (obj of arr)
       await expect(getProfile(obj)).rejects.toThrow(InvalidInputError);
-    });
   });
 
   it("User not found", async () => {

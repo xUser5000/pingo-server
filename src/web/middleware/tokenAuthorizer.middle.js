@@ -10,7 +10,6 @@ const tokenAuthorizer = async (req, res, next) => {
     req.uid = uid;
     next();
   } catch (e) {
-    /* istanbul ignore else */
     if (e instanceof HttpError)
       res.status(e.code).send({ errors: [e.message] });
     else res.status(500).send({ errors: ["Internal server error"] });

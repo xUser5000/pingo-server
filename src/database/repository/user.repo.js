@@ -1,8 +1,5 @@
 const { userModel } = require("../model/user.model");
 
-/**
- * @description Creates the required indexes at runtime
- */
 const createIndexes = () => userModel.createIndexes();
 
 /**

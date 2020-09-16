@@ -6,7 +6,7 @@ const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 const { login, register } = require("../../../src/service/auth");
 
 describe("Login test", () => {
-  it("Validation testing", () => {
+  it("Validation testing", async () => {
     const arr = [];
     arr[0] = { email: "", password: "" };
     arr[1] = { email: "abdallah@gmail.com", password: "" };
@@ -18,9 +18,8 @@ describe("Login test", () => {
     arr[7] = {};
     arr[8] = { email: " ", password: " " };
 
-    arr.forEach(async obj => {
+    for (obj of arr)
       await expect(register(obj)).rejects.toThrow(InvalidInputError);
-    });
   });
 
   it("Did not find the user", async () => {

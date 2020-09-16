@@ -62,9 +62,8 @@ describe("Create a new account", () => {
 
     arr[10] = {};
 
-    arr.forEach(async obj => {
+    for (obj of arr)
       await expect(register(obj)).rejects.toThrow(InvalidInputError);
-    });
   });
 
   it("Email address is already in use", async () => {
