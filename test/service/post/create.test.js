@@ -8,7 +8,10 @@ const { NotFoundError } = require("../../../src/error/NotFoundError");
 
 const { createPost } = require("../../../src/service/post");
 
-const { saveUser } = require("../../../src/database/repository/user.repo");
+const {
+  saveUser,
+  findUserById
+} = require("../../../src/database/repository/user.repo");
 
 describe("Create Post", () => {
   it("Validation", async () => {
@@ -38,7 +41,7 @@ describe("Create Post", () => {
   });
 
   it("Create post OK", async () => {
-    const user = await saveUser({
+    let user = await saveUser({
       username: "abdo",
       email: "abdallah@gmail.com",
       password: "123456"
@@ -61,5 +64,9 @@ describe("Create Post", () => {
     expect(res).toHaveProperty("content", req.content);
     expect(res).toHaveProperty("image");
     expect(res).toHaveProperty("time");
+
+    user = await findUserById(user._id.toString());
+
+    expect(user.posts.includes(res._id.toString())).toBe(true);
   });
 });

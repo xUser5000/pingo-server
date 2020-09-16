@@ -39,6 +39,13 @@ const search = query =>
     .lean();
 
 /**
+ * @param {String} id Id of the user
+ * @param {String} post Id of the post document
+ */
+const addPost = (userId, postId) =>
+  userModel.findByIdAndUpdate(userId, { $push: { posts: postId } });
+
+/**
  * @description Deletes all users in the database
  */
 const deleteAllUsers = () => userModel.deleteMany({});
@@ -50,6 +57,7 @@ module.exports = {
   findUserByEmail,
   findUserByUsername,
   saveUser,
-  deleteAllUsers,
-  search
+  search,
+  addPost,
+  deleteAllUsers
 };
