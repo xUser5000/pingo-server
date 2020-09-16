@@ -17,7 +17,7 @@ npm start
 ## Run tests
 
 ```sh
-npm run test
+npm test
 ```
 
 ## Author
