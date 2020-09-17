@@ -1,3 +1,5 @@
+require("../../test.setup");
+
 const { NotFoundError } = require("../../../src/error/NotFoundError");
 const { InvalidInputError } = require("../../../src/error/InvalidInputError");
 
@@ -7,8 +9,6 @@ const {
   saveUser,
   createIndexes
 } = require("../../../src/database/repository/user.repo");
-
-require("../../test.setup");
 
 describe("Search for users", () => {
   it("Validation", async () => {

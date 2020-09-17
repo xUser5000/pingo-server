@@ -18,8 +18,20 @@ const findPostById = id => postModel.findById(id).lean();
  */
 const savePost = post => postModel.create(post);
 
+/**
+ * @description Searches for posts given a query string
+ * @param {String} query
+ * @returns {Array} List of users sorted according to their search score
+ */
+const search = query =>
+  postModel
+    .find({ $text: { $search: query } }, { score: { $meta: "textScore" } })
+    .sort({ score: { $meta: "textScore" } })
+    .lean();
+
 module.exports = {
   createIndexes,
   findPostById,
-  savePost
+  savePost,
+  search
 };

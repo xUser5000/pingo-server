@@ -1,7 +1,6 @@
 const { getPostSchema } = require("./get.schema");
 
 const { InvalidInputError } = require("../../../error/InvalidInputError");
-const { ForbiddenError } = require("../../../error/ForbiddenError");
 const { NotFoundError } = require("../../../error/NotFoundError");
 
 const { validate } = require("../../../util/validator.util");
