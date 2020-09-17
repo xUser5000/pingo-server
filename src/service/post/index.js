@@ -1,5 +1,7 @@
-const { createPost } = require("./create/create.service");
+const { createPost } = require("./createPost/create.service");
+const { getPost } = require("./getPost/get.service");
 
 module.exports = {
-  createPost
+  createPost,
+  getPost
 };

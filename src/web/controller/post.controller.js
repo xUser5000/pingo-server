@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { controller } = require("../controller");
 
-const { createPost } = require("../../service/post/index");
+const { createPost, getPost } = require("../../service/post/index");
 
 router.post("/create", (req, res) => {
   controller(res)(createPost)({
@@ -10,5 +10,9 @@ router.post("/create", (req, res) => {
     image: req.body.image
   });
 });
+
+router.post("/get_posts", (req, res) =>
+  controller(res)(getPost)(req.body["ids"])
+);
 
 module.exports.postController = () => router;

@@ -9,8 +9,7 @@ const { isImage, upload } = require("../../../util/image.util");
 
 const {
   findUserById,
-  addPost,
-  saveUser
+  addPost
 } = require("../../../database/repository/user.repo");
 const { savePost } = require("../../../database/repository/post.repo");
 
