@@ -1,5 +1,5 @@
 const joi = require("joi");
-const { buildSchema } = require("../../../util/validator.util");
+const { buildSchema, idExpression } = require("../../../util/validator.util");
 
 module.exports.getPostSchema = buildSchema({
   ids: joi
@@ -8,6 +8,7 @@ module.exports.getPostSchema = buildSchema({
       joi
         .string()
         .trim()
+        .regex(idExpression)
         .required()
     )
     .required()

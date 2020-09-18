@@ -4,7 +4,8 @@ const { controller } = require("../controller");
 const {
   createPost,
   getPost,
-  searchPosts
+  searchPosts,
+  deletePost
 } = require("../../service/post/index");
 
 router.post("/create", (req, res) => {
@@ -21,6 +22,10 @@ router.post("/get_posts", (req, res) =>
 
 router.get("/search/:query", (req, res) =>
   controller(res)(searchPosts)(req.params["query"])
+);
+
+router.delete("/delete/:postId", (req, res) =>
+  controller(res)(deletePost)(req.params.postId)
 );
 
 module.exports.postController = () => router;

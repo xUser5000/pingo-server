@@ -28,5 +28,10 @@ const validate = async (obj, schema) => {
  */
 const buildSchema = schema => joi.object(schema).options({ abortEarly: false });
 
+/**
+ * A regular expression for matching mongodb objectid (AKA a string of 24 hex characters)
+ */
+const idExpression = new RegExp("^[0-9a-fA-F]{24}$");
+
 /* Exports */
-module.exports = { validate, buildSchema };
+module.exports = { validate, buildSchema, idExpression };

@@ -24,6 +24,7 @@ const controller = res => service => async (...args) => {
       }
     } else {
       res.status(500).send(createError("Internal server error"));
+      console.log(e);
     }
   }
 };
