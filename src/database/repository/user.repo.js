@@ -46,6 +46,14 @@ const addPost = (userId, postId) =>
   userModel.findByIdAndUpdate(userId, { $push: { posts: postId } });
 
 /**
+ * Removes a postId from the posts array
+ * @param {String} userId Id of user that has the post
+ * @param {String} postId Id ot the post to be deleted
+ */
+const removePost = (userId, postId) =>
+  userModel.findByIdAndUpdate(userId, { $pull: { posts: postId } });
+
+/**
  * @description Deletes all users in the database
  */
 const deleteAllUsers = () => userModel.deleteMany({});
@@ -59,5 +67,6 @@ module.exports = {
   saveUser,
   search,
   addPost,
+  removePost,
   deleteAllUsers
 };

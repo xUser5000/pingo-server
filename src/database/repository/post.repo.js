@@ -29,9 +29,16 @@ const search = query =>
     .sort({ score: { $meta: "textScore" } })
     .lean();
 
+/**
+ * Delete a single post given its id
+ * @param {String} postId Id of the post being deleted
+ */
+const removePost = postId => postModel.findByIdAndDelete(postId);
+
 module.exports = {
   createIndexes,
   findPostById,
   savePost,
-  search
+  search,
+  removePost
 };
