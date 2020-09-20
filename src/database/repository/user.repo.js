@@ -59,6 +59,12 @@ const addFollower = (userA, userB) =>
 const addFollowing = (userA, userB) =>
   userModel.findByIdAndUpdate(userA, { $push: { following: userB } });
 
+const removeFollower = (userA, userB) =>
+  userModel.findByIdAndUpdate(userA, { $pull: { followers: userB } });
+
+const removeFollowing = (userA, userB) =>
+  userModel.findByIdAndUpdate(userA, { $pull: { following: userB } });
+
 /**
  * @description Deletes all users in the database
  */
@@ -76,5 +82,7 @@ module.exports = {
   removePost,
   addFollower,
   addFollowing,
+  removeFollower,
+  removeFollowing,
   deleteAllUsers
 };
