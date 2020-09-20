@@ -9,16 +9,21 @@ const { getPost } = require("../../../src/service/post");
 
 describe("Get post data", () => {
   it("Validation", async () => {
-    const arr = [[][""], [" "], [" ", " Hi"]];
+    const arr = [[], [""], [" "], [" ", " Hi"], ["Hello", "Hi"]];
 
     for (obj of arr)
       await expect(getPost(obj)).rejects.toThrow(InvalidInputError);
   });
 
-  it("Some posts were not found", async () => {
-    const req = ["Hello", "Hi"];
+  it("Posts not found", async () => {
+    await savePost({
+      author: "hello",
+      content: "Hello World"
+    });
 
-    await expect(getPost(req)).rejects.toThrow(NotFoundError);
+    await expect(getPost(["507f191e810c19729de860ea"])).rejects.toThrow(
+      NotFoundError
+    );
   });
 
   it("Get post Data OK", async () => {

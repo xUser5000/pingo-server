@@ -21,12 +21,13 @@ module.exports.getPost = async ids => {
   }
 
   // execute all the queries
-  let queries = ids.map(id => findPostById(id));
+  const queries = ids.map(id => findPostById(id));
+  const posts = await Promise.all(queries);
 
-  try {
-    // wait for the execution and return the results
-    return await Promise.all(queries);
-  } catch (e) {
-    throw new NotFoundError("Some posts were not found");
-  }
+  // check if some posts were not found
+  posts.forEach(post => {
+    if (!post) throw new NotFoundError("Some users were not found");
+  });
+
+  return posts;
 };

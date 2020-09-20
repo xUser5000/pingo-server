@@ -26,7 +26,7 @@ describe("Profile test", () => {
     };
     user = await saveUser(user);
 
-    await expect(getProfile(["5e2137ca9bt29c0ea652997b"])).rejects.toThrow(
+    await expect(getProfile(["507f191e810c19729de860ea"])).rejects.toThrow(
       NotFoundError
     );
   });

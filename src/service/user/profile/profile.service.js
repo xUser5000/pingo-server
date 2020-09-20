@@ -22,11 +22,12 @@ module.exports.getProfile = async ids => {
 
   // execute all the queries
   let queries = ids.map(id => findUserById(id));
+  const users = await Promise.all(queries);
 
-  try {
-    // wait for the execution and return the results
-    return await Promise.all(queries);
-  } catch (e) {
-    throw new NotFoundError("Some users were not found");
-  }
+  // check if some users were not found
+  users.forEach(user => {
+    if (!user) throw new NotFoundError("Some users were not found");
+  });
+
+  return users;
 };
