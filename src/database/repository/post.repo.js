@@ -30,6 +30,22 @@ const search = query =>
     .lean();
 
 /**
+ * Add a user id to the likers of a post
+ * @param {String} userId Id of the user making the request
+ * @param {String} postId Id of post
+ */
+const like = (userId, postId) =>
+  postModel.findByIdAndUpdate(postId, { $push: { likes: userId } });
+
+/**
+ * Remove a user id from the likers of a post
+ * @param {String} userId Id of the user making the request
+ * @param {String} postId Id of post
+ */
+const unlike = (userId, postId) =>
+  postModel.findByIdAndUpdate(postId, { $pull: { likes: userId } });
+
+/**
  * Delete a single post given its id
  * @param {String} postId Id of the post being deleted
  */
@@ -40,5 +56,7 @@ module.exports = {
   findPostById,
   savePost,
   search,
+  like,
+  unlike,
   removePost
 };
