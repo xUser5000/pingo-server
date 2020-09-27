@@ -1,12 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// comment schema
-const commentSchema = new Schema({
-  time: String,
-  author: String,
-  content: String
-});
-
 // post schema
 const postSchema = new Schema({
   time: Number,
@@ -14,7 +7,7 @@ const postSchema = new Schema({
   content: String,
   image: String,
   likes: [String],
-  comments: [commentSchema]
+  comments: [String]
 });
 
 // index the content of the post
