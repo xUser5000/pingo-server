@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to pingo-server 👋</h1>
 
-> A social network back-end infrastructure
+A social network back-end API
 
 ## Install All dependencies
 
