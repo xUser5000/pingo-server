@@ -12,6 +12,10 @@ const {
 } = require("../../../database/repository/post.repo");
 const { findUserById } = require("../../../database/repository/user.repo");
 
+/**
+ * User unlikes a post
+ * @async
+ */
 module.exports.unlike = async ({ userId, postId }) => {
   // validation
   const result = await validate({ userId, postId }, unlikeSchema);

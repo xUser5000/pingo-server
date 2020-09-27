@@ -46,12 +46,12 @@ const removeLike = (userId, postId) =>
   postModel.findByIdAndUpdate(postId, { $pull: { likes: userId } });
 
 /**
- * Remove a user id from the likers of a post
- * @param {String} userId Id of the user making the request
+ * Add a comment id to the comments of a post
  * @param {String} postId Id of post
+ * @param {String} commentId Id of comment
  */
-const unlike = (userId, postId) =>
-  postModel.findByIdAndUpdate(postId, { $pull: { likes: userId } });
+const addComment = (postId, commentId) =>
+  postModel.findByIdAndUpdate(postId, { $push: { comments: commentId } });
 
 /**
  * Delete a single post given its id
@@ -66,5 +66,6 @@ module.exports = {
   search,
   addLike,
   removeLike,
-  removePost
+  removePost,
+  addComment
 };

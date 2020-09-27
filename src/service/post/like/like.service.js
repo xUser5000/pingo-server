@@ -12,6 +12,10 @@ const {
 } = require("../../../database/repository/post.repo");
 const { findUserById } = require("../../../database/repository/user.repo");
 
+/**
+ * User likes a post
+ * @async
+ */
 module.exports.like = async ({ userId, postId }) => {
   // validation
   const result = await validate({ userId, postId }, likeSchema);
