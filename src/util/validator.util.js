@@ -12,6 +12,7 @@ const validate = async (obj, schema) => {
     await joi.validate(obj, schema);
     return null;
   } catch (e) {
+    if (!e.details) console.log(e);
     return (errors = e.details.map(detail => {
       return {
         field: detail.context.label,

@@ -5,7 +5,9 @@ const {
   createPost,
   getPost,
   searchPosts,
-  deletePost
+  deletePost,
+  like,
+  unlike
 } = require("../../service/post/index");
 
 router.post("/create", (req, res) => {
@@ -26,6 +28,14 @@ router.get("/search/:query", (req, res) =>
 
 router.delete("/delete/:postId", (req, res) =>
   controller(res)(deletePost)(req.params.postId)
+);
+
+router.post("/like/:postId", (req, res) =>
+  controller(res)(like)({ userId: req.uid, postId: req.params.postId })
+);
+
+router.delete("/unlike/:postId", (req, res) =>
+  controller(res)(unlike)({ userId: req.uid, postId: req.params.postId })
 );
 
 module.exports.postController = () => router;

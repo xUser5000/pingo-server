@@ -34,8 +34,16 @@ const search = query =>
  * @param {String} userId Id of the user making the request
  * @param {String} postId Id of post
  */
-const like = (userId, postId) =>
+const addLike = (userId, postId) =>
   postModel.findByIdAndUpdate(postId, { $push: { likes: userId } });
+
+/**
+ * Add a user id to the likers of a post
+ * @param {String} userId Id of the user making the request
+ * @param {String} postId Id of post
+ */
+const removeLike = (userId, postId) =>
+  postModel.findByIdAndUpdate(postId, { $pull: { likes: userId } });
 
 /**
  * Remove a user id from the likers of a post
@@ -56,7 +64,7 @@ module.exports = {
   findPostById,
   savePost,
   search,
-  like,
-  unlike,
+  addLike,
+  removeLike,
   removePost
 };
