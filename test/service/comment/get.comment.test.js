@@ -30,7 +30,7 @@ describe("Get Comment", () => {
       content: "Hello World"
     });
 
-    const res = await getComment(comment._id.toString());
+    const res = (await getComment([comment._id.toString()]))[0];
 
     expect(res).toHaveProperty("time", comment.time);
     expect(res).toHaveProperty("userId", comment.userId);
