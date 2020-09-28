@@ -10,7 +10,7 @@ const {
 const { validate } = require("../../../util/validator.util");
 
 /**
- * Fetch comment data about users
+ * Fetch comment data about Comments
  * @async
  * @param {Array<String>} ids Id array of comments to be fetched
  * @returns {Array<Comment>} array of comments data
@@ -26,9 +26,9 @@ module.exports.getComment = async ids => {
   let queries = ids.map(id => findCommentById(id));
   const comments = await Promise.all(queries);
 
-  // check if some users were not found
+  // check if some comments were not found
   comments.forEach(comment => {
-    if (!comment) throw new NotFoundError("Some users were not found");
+    if (!comment) throw new NotFoundError("Some Comments were not found");
   });
 
   return comments;
