@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { controller } = require("../controller");
 
-const { createComment } = require("../../service/comment");
+const { createComment, getComment } = require("../../service/comment");
 
 router.post("/create", (req, res) =>
   controller(res)(createComment)({
@@ -10,5 +10,7 @@ router.post("/create", (req, res) =>
     content: req.body.content
   })
 );
+
+router.post("/get", (req, res) => controller(res)(getComment)(req.body["ids"]));
 
 module.exports.commentController = () => router;
