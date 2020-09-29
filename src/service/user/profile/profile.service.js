@@ -21,7 +21,7 @@ module.exports.getProfile = async ids => {
   }
 
   // execute all the queries
-  let queries = ids.map(id => findUserById(id));
+  let queries = ids.map(id => findUserById(id, false));
   const users = await Promise.all(queries);
 
   // check if some users were not found

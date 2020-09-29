@@ -50,5 +50,9 @@ describe("Profile test", () => {
     ).resolves.toHaveLength(2);
     await expect(getProfile([obj1._id.toString()])).resolves;
     await expect(getProfile([obj1._id.toString()])).resolves.toHaveLength(1);
+
+    const res = (await getProfile([obj1._id.toString()]))[0];
+    expect(res).not.toHaveProperty("password");
+    expect(res).not.toHaveProperty("email");
   });
 });

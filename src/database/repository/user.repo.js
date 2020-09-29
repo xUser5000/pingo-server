@@ -6,7 +6,15 @@ const createIndexes = () => userModel.createIndexes();
  * @param {String} id The id of the user
  * @returns {User}
  */
-const findUserById = id => userModel.findById(id).lean();
+const findUserById = async (id, sensitive = true) => {
+  if (sensitive) return await userModel.findById(id).lean();
+  else
+    return await userModel
+      .findById(id)
+      .select("-password")
+      .select("-email")
+      .lean();
+};
 
 /**
  * @param {String} email The email of the user
