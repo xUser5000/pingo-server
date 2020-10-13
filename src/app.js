@@ -9,6 +9,7 @@ const { authController } = require("./web/controller/auth.controller");
 const { userController } = require("./web/controller/user.controller");
 const { postController } = require("./web/controller/post.controller");
 const { commentController } = require("./web/controller/comment.controller");
+const { timelineController } = require("./web/controller/timeline.controller");
 
 // middlewares
 const { tokenAuthorizer } = require("./web/middleware/tokenAuthorizer.middle");
@@ -31,5 +32,6 @@ app.use("/api/private/*", tokenAuthorizer());
 app.use("/api/private/user", userController());
 app.use("/api/private/post", postController());
 app.use("/api/private/comment", commentController());
+app.use("/api/private/timeline", timelineController());
 
 module.exports = { app };
