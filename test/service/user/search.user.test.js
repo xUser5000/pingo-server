@@ -37,7 +37,7 @@ describe("Search for users", () => {
   });
 
   it("Found users", async () => {
-    createIndexes();
+    await createIndexes();
 
     await saveUser({
       username: "abdallah",
